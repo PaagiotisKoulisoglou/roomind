@@ -11,18 +11,41 @@
     --font-serif: "Instrument Serif", serif;
     --font-sans: Inter, sans-serif;
     --shadow-neobrutalism: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+    --nav-h: 64px; /* fixed navbar height */
 }
 
 @layer base {
+    /* Ensure consistent sizing and remove default body margin to avoid layout stretching */
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        height: 100%;
+    }
+
     html {
         scroll-behavior: smooth;
     }
 
     body {
+        margin: 0;
         background-color: #fdfbf7;
         color: #1a1a1a;
         font-family: Inter, sans-serif;
         -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ensure media scale correctly by default */
+    img, video, canvas, svg {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Offset in-page anchors for the fixed navbar */
+    section[id], [id^="section-"] {
+        scroll-margin-top: var(--nav-h);
     }
 
     h1,
@@ -192,7 +215,7 @@
     }
 
     .upload {
-        @apply w-full;
+        @apply w-full scroll-mt-16 min-h-[50vh];
 
         .dropzone {
             @apply relative h-48 rounded-xl border-2 border-dashed transition-all duration-300 flex flex-col items-center justify-center cursor-pointer bg-zinc-50 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100;
@@ -404,6 +427,10 @@
 
         .hero {
             @apply pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center;
+            /* Fill the viewport minus the fixed navbar height */
+            min-height: calc(100vh - var(--nav-h));
+            min-height: calc(100dvh - var(--nav-h));
+            min-height: calc(100svh - var(--nav-h));
 
             .announce {
                 @apply mb-8 inline-flex items-center px-3 py-1 rounded-md bg-white border border-zinc-200 shadow-sm;

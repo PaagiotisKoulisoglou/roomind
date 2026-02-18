@@ -10,12 +10,14 @@ export type ButtonVariant =
   | 'light'
   | 'dark'
   | 'ghost'
-  | 'link';
+  | 'outline'
+  | 'link'
+  | (string & {});
 
-export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl' | (string & {});
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
@@ -34,7 +36,7 @@ export const Button: React.FC<ButtonProps> = ({
     'btn',
     `btn--${variant}`,
     `btn--${size}`,
-    fullWidth ? 'btn--fullWidth' : undefined,
+    fullWidth ? 'btn--full' : undefined,
     className,
   ]
     .filter(Boolean)
