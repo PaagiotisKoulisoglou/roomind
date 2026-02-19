@@ -215,7 +215,7 @@
     }
 
     .upload {
-        @apply w-full scroll-mt-16 min-h-[50vh];
+        @apply w-full scroll-mt-16;
 
         .dropzone {
             @apply relative h-48 rounded-xl border-2 border-dashed transition-all duration-300 flex flex-col items-center justify-center cursor-pointer bg-zinc-50 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100;

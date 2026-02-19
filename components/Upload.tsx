@@ -55,9 +55,8 @@ const Upload: React.FC<UploadProps> = ({ onComplete }) => {
 
         const reader = new FileReader();
         reader.onload = () => {
-            const result = reader.result as string; // data URL
-            const base64 = result.includes(",") ? result.split(",")[1] : result;
-            startProgress(base64);
+            const result = reader.result as string; // full data URL (e.g. data:image/png;base64,...)
+            startProgress(result);
         };
         reader.onerror = () => {
             // Reset state on error
