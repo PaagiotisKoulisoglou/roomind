@@ -77,23 +77,27 @@ export default function App() {
     },[])
 
     const signIn = async () => {
-        await puterSignIn();
-        return await refreshAuth();
-    }
+        try {
+            await puterSignIn();
+        } finally {
+
+            return await refreshAuth();
+        }
+    };
     const signOut = async () => {
-        puterSignOut();
+        await puterSignOut();
         return await refreshAuth();
     }
 
-  return (
-      <main className="min-h-screen bg-background text-foreground relative z-10 pt-16">
-          <Outlet
-            context={{
-                ...authState, refreshAuth, signIn, signOut
-            }}
-          />
-      </main>
-  )
+    return (
+        <main className="min-h-screen bg-background text-foreground relative z-10 pt-16">
+            <Outlet
+                context={{
+                    ...authState, refreshAuth, signIn, signOut
+                }}
+            />
+        </main>
+    )
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
