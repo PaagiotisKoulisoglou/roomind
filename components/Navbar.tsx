@@ -29,7 +29,7 @@ const Navbar = () => {
                 <div className="left">
                     <div className="brand">
                         <Box className="logo" />
-                        <span className="name">Roomind</span>
+                        <span className="name">RoomMind</span>
                     </div>
                     <ul className="links">
                         <a href="#">Product</a>
