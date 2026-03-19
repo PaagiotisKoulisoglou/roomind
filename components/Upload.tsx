@@ -3,11 +3,7 @@ import {useOutletContext} from "react-router";
 import {CheckCircle2, ImageIcon, UploadIcon} from "lucide-react";
 import {PROGRESS_INTERVAL_MS, PROGRESS_STEP, REDIRECT_DELAY_MS} from "../lib/constants";
 
-type UploadProps = {
-    onComplete?: (base64: string) => void;
-}
-
-const Upload: React.FC<UploadProps> = ({ onComplete }) => {
+const Upload: React.FC<UploadProps> = ({ onComplete, className }) => {
     const [file, setFile] = useState<File | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [progress, setProgress] = useState(0);
@@ -110,7 +106,7 @@ const Upload: React.FC<UploadProps> = ({ onComplete }) => {
     };
 
     return (
-        <div className="upload">
+        <div className={`upload ${className ?? ''}`}>
             {!file ? (
                 <div
                     className={`dropzone ${isDragging ? 'is-dragging' : ''}`}
@@ -120,7 +116,7 @@ const Upload: React.FC<UploadProps> = ({ onComplete }) => {
                     onDrop={handleDrop}
                 >
                     <input
-                        type="file" className="drop-input" accept=".jpg,.jpeg,.png" disabled={!isSignedIn}
+                        type="file" className="drop-input" accept=".jpg,.jpeg,.png,.webp" disabled={!isSignedIn}
                         onChange={handleInputChange}
                     />
                     <div className="drop-content">
